@@ -7,7 +7,6 @@ export default function Login() {
             Sign in to your account
           </h2>
 
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST">
             <div>

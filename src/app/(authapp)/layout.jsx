@@ -1,10 +1,8 @@
-import { useRouter } from 'next/navigation'
+
 import MainLayout from '../components/MainLayout'
-
-
-
 import { Inter } from 'next/font/google'
 import { ContextProvider } from '../contexts/ContextProvider'
+import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
