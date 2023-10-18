@@ -1,6 +1,20 @@
+"use client"
+import { useRouter } from "next/navigation"
+import { useStateContext } from "../contexts/ContextProvider"
 
 
 function GuestLayout({ children}) {
+    const {userToken} = useStateContext()
+    const router = useRouter()
+
+
+
+    if(userToken){
+      router.push('/dashboard')
+
+    }
+
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -11,6 +25,7 @@ function GuestLayout({ children}) {
           />
 
         </div>
+
         {children}
     </div>
   )

@@ -5,7 +5,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { ContextProvider, UserStateContext } from '../contexts/ContextProvider'
+import { ContextProvider, useStateContext } from '../contexts/ContextProvider'
 
 
 
@@ -23,7 +23,7 @@ function classNames(...classes) {
 
 
 const MainLayout = ({children}) => {
-  const {currentUser, userToken} = UserStateContext()
+  const {currentUser, userToken} = useStateContext()
   const router = useRouter()
 
   if(!userToken){

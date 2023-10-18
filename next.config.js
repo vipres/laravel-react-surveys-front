@@ -3,4 +3,15 @@ const nextConfig = {
 
 }
 
-module.exports = nextConfig
+module.exports = {
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'api.yoursurveys.xyz',
+            port: '',
+            pathname: '/images/**',
+          },
+        ],
+      },
+}
