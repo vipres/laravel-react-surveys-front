@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
+  async rewrites() {
+    return [
+        {
+            source: '/',
+            destination: '/dashboard'
+        }
+    ];
+},
 }
 
 module.exports = {
@@ -8,10 +15,11 @@ module.exports = {
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: 'api.yoursurveys.xyz',
+            hostname: 'api.slingacademy.com',
             port: '',
-            pathname: '/images/**',
+            pathname: '/public/sample-photos/**',
           },
         ],
       },
+    ...nextConfig
 }

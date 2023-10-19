@@ -1,5 +1,6 @@
 import { ArrowTopRightOnSquareIcon, PencilIcon, TrashIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
+import TButton from "./core/TButton"
 
 
 const SurveyListItem = ({survey, onDeleteClick}) => {
@@ -12,7 +13,7 @@ const SurveyListItem = ({survey, onDeleteClick}) => {
         className="overflow-hidden flex-1"
         ></div>
         <div className="flex justify-between items-center mt-3">
-            <TButton to={`surveys/${survey.id}`}>
+            <TButton href={`surveys/${survey.id}`}>
                 <PencilIcon className="h-5 w-5 mr-2" />
                 Edit
             </TButton>
