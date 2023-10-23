@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   async rewrites() {
     return [
         {
@@ -11,7 +12,8 @@ const nextConfig = {
 }
 
 module.exports = {
-    images: {
+
+  images: {
         remotePatterns: [
           {
             protocol: 'https',
