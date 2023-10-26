@@ -23,7 +23,6 @@ export default function RootLayout({children}) {
        <body className={`${inter.className} ${"h-full"}`}>
         <ContextProvider>
         <GuestLayout>
-
           {children}</GuestLayout>
         </ContextProvider>
         </body>

@@ -5,7 +5,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { ContextProvider, useStateContext } from '../contexts/ContextProvider'
+import { useStateContext } from '../contexts/ContextProvider'
+import axiosClient from '@/global/lib/axios'
 
 
 
@@ -23,7 +24,7 @@ function classNames(...classes) {
 
 
 const MainLayout = ({children}) => {
-  const {currentUser, userToken} = useStateContext()
+  const {currentUser, userToken, setCurrentUser, setUserToken} = useStateContext()
   const router = useRouter()
 
   if(!userToken){
@@ -31,17 +32,18 @@ const MainLayout = ({children}) => {
     router.push('/login')
 
   }
-
-
     const pathname = usePathname();
-
     const isActive = (href) => {
       return href === pathname
     }
 
     const logout = (e) => {
       e.preventDefault()
-      console.log('logout');
+      axiosClient.post('/logout').then(res => {
+        setCurrentUser({})
+        setUserToken(null)
+        //router.push('/login')
+      })
     }
 
 
