@@ -1,13 +1,15 @@
 "use client"
 import PageComponent from "@/app/components/PageComponent";
 import TButton from "@/app/components/core/TButton";
+import axiosClient from "@/global/lib/axios";
 import { PhotoIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
 const SurveyView = () => {
-
+ const navigate = useRouter();
     const [survey, setSurvey] = useState({
         title: "",
         slug: "",
@@ -20,23 +22,51 @@ const SurveyView = () => {
         questions: [],
     })
 
-    async function onSubmit(event) {
-        console.log('onSubmit', survey);
+    const [error, setError]= useState('');
 
-      }
-
-
-      const onImageChoose = (event) => {
-        console.log("onImageChoose", event.target.files[0]);
+    const onImageChoose = (ev) => {
+        const file = ev.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+            setSurvey({ ...survey, image: file, image_url: reader.result });
+            ev.target.value = null;
+        }
+        reader.readAsDataURL(file);
     }
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        const payload = {...survey};
+        if(payload.image) {
+            payload.image = payload.image_url
+        }
+        delete payload.image_url
+        axiosClient.post("/survey", payload)
+        .then((response) => {
+            console.log(response.data);
+            navigate.push("/surveys");
+          })
+          .catch((err) => {
+            if(err && err.response){
+              setError(err.response.data.message);
+            }
+            console.log(error, error.response);
+          });
+    }
+
+
+
 
     return (
 
         <PageComponent title={"Create new Survey"}>
         <form action="#" method="POST" onSubmit={onSubmit}>
           <div className="shadow sm:overflow-hidden sm:rounded-md">
-            <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
 
+            <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+            {error && <div className="bg-red-500 text-white py-3 px-3 rounded-lg">
+                {error}
+            </div>}
 
               {/*Image*/}
               <div>
