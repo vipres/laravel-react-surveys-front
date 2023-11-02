@@ -1,5 +1,6 @@
 "use client"
 import PageComponent from "@/app/components/PageComponent";
+import SurveyQuestions from "@/app/components/SurveyQuestions";
 import TButton from "@/app/components/core/TButton";
 import axiosClient from "@/global/lib/axios";
 import { PhotoIcon } from "@heroicons/react/20/solid";
@@ -54,6 +55,10 @@ const SurveyView = () => {
           });
     }
 
+    const onSurveyUpdate = (survey) => {
+      setSurvey({...survey})
+    }
+
 
 
 
@@ -75,7 +80,7 @@ const SurveyView = () => {
                 </label>
                 <div className="mt-1 flex items-center">
                   {survey.image_url && (
-                    <img
+                    <Image
                       src={survey.image_url}
                       alt=""
                       className="w-32 h-32 object-cover"
@@ -193,6 +198,8 @@ const SurveyView = () => {
                 </div>
               </div>
               {/*Active*/}
+
+              <SurveyQuestions survey={survey} onSurveyUpdate={onSurveyUpdate}/>
 
 
             </div>
